@@ -2,6 +2,7 @@ package com.library.models;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.TreeSet;
 
@@ -15,10 +16,11 @@ import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity(name="Author")
 @Table(name = "author")
-public class Author implements Serializable{
+public class Author implements Serializable, Comparable{
 	/**
 	 * 
 	 */
@@ -30,6 +32,7 @@ public class Author implements Serializable{
 	@GeneratedValue
 	private long idAuthor;
 	private String name;
+	//@Column(unique = true)
 	private String email;
 	
 	
@@ -58,19 +61,18 @@ public class Author implements Serializable{
 	@ManyToMany(cascade =  CascadeType.ALL,targetEntity=com.library.models.Book.class)
 	@JoinTable(name = "author_book", joinColumns = { @JoinColumn(name = "idAuthor") }, inverseJoinColumns = {
 			@JoinColumn(name = "idBook") })
-	private List<Book> books= new ArrayList<Book>();
+	private java.util.Set<Book> books= new HashSet<Book>();
+	//private List<Book> books= new ArrayList<Book>();
 
-	public List<Book> getBooks() {
+	public java.util.Set<Book> getBooks() {
 		return books;
 	}
 
-	public void setBooks(ArrayList<Book> books) {
+	public void setBooks(HashSet<Book> books) {
 		this.books = books;
 	}
 
-	/**
-	 * @return the id
-	 */
+	
 	
 
 	/**
@@ -165,6 +167,21 @@ public class Author implements Serializable{
 	@Override
 	public String toString() {
 		return "Author [name=" + name + ", email=" + email + ", books=" + books + "]";
+	}
+
+	@Override
+	public int compareTo(Object obj) {
+		// TODO Auto-generated
+		
+		int value=-1;
+		if (!(obj instanceof Author)||obj==null) {
+			return value;
+		}else {
+			Author writer= (Author)obj;
+			value= this.email.hashCode()-writer.email.hashCode();
+		}
+		
+		return value;
 	}
 
 

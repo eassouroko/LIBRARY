@@ -1,7 +1,9 @@
 package com.library.models;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -30,22 +32,33 @@ public class Book implements Serializable{
 	@Id
 	@GeneratedValue
 	private long idBook;
-	
+	private Date publicationDate;
+	private Long quantity;
+	public Long getQuantity() {
+		return quantity;
+	}
+
+
+	public void setQuantity(Long quantity) {
+		this.quantity = quantity;
+	}
+
+
 	private String title;
 	@ManyToMany( mappedBy = "books")
-	private List<Author> authors= new ArrayList<Author>();
+	private java.util.Set<Author> authors= new HashSet<Author>();
 
 	public Book() {
 		super();
 	}
 	
 
-	public Book(String title) {
+	public Book(String title, Date date) {
 		super();
 		this.title = title;
 		
 		
-		//this.publicationDate = publicationDate;
+		this.publicationDate = date;
 	}
 
 	
@@ -56,13 +69,23 @@ public class Book implements Serializable{
 	}
 
 	
-	public List<Author> getAuthors() {
+	public java.util.Set<Author> getAuthors() {
 		return authors;
 	}
 	
 
-	public void setAuthors(ArrayList<Author> authors) {
+	public void setAuthors(HashSet<Author> authors) {
 		this.authors = authors;
+	}
+
+
+	public Date getPublicationDate() {
+		return publicationDate;
+	}
+
+
+	public void setPublicationDate(Date publicationDate) {
+		this.publicationDate = publicationDate;
 	}
 
 

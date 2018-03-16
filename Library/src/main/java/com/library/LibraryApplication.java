@@ -1,5 +1,7 @@
 package com.library;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -7,6 +9,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+import com.library.models.Author;
+import com.library.models.Book;
 import com.library.services.AuthorRepository;
 import com.library.services.BookRepository;
 
@@ -26,6 +30,18 @@ public class LibraryApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
+		
+		Author author1= new Author("Markus Garvey","mgarvey@hotmail.com");
+		Book book1= new Book("My Way", java.sql.Date.valueOf("2017-03-01"));
+		book1.setQuantity(new Long(100));
+		author1.getBooks().add(book1);
+		//java.util.ArrayList<Author> existing=(ArrayList<Author>) authorRepository.findAll();
+		
+		authorRepository.save(author1);
+		
+		
+		
+		
 		
 	}
 }
