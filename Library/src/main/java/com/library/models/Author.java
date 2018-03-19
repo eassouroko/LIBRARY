@@ -60,7 +60,7 @@ public class Author implements Serializable, Comparable{
 
 	@ManyToMany(cascade =  CascadeType.ALL,targetEntity=com.library.models.Book.class)
 	@JoinTable(name = "author_book", joinColumns = { @JoinColumn(name = "idAuthor") }, inverseJoinColumns = {
-			@JoinColumn(name = "idBook") })
+			@JoinColumn(name = "isbnBook") })
 	private java.util.Set<Book> books= new HashSet<Book>();
 	//private List<Book> books= new ArrayList<Book>();
 

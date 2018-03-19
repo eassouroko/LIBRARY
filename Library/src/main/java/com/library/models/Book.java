@@ -29,9 +29,13 @@ public class Book implements Serializable{
 	/**
 	 * 
 	 */
+	//Wannt to try with ISBN
+	
+//	@GeneratedValue
+//	private long idBook;
+	
 	@Id
-	@GeneratedValue
-	private long idBook;
+	private long isbnBook;
 	private Date publicationDate;
 	private Long quantity;
 	public Long getQuantity() {
@@ -53,8 +57,9 @@ public class Book implements Serializable{
 	}
 	
 
-	public Book(String title, Date date) {
+	public Book(long isbn,String title, Date date) {
 		super();
+		this.isbnBook=isbn;
 		this.title = title;
 		
 		
@@ -94,7 +99,7 @@ public class Book implements Serializable{
 	 */
 	@Override
 	public String toString() {
-		return "Book [id=" + idBook + ", title=" + title + ", authors=" + authors + "]";
+		return "Book [id=" + isbnBook + ", title=" + title + ", authors=" + authors + "]";
 	}
 
 
@@ -123,7 +128,7 @@ public class Book implements Serializable{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((authors == null) ? 0 : authors.hashCode());
-		result = prime * result + (int) (idBook ^ (idBook >>> 32));
+		result = prime * result + (int) (isbnBook ^ (isbnBook >>> 32));
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
 	}
@@ -151,7 +156,7 @@ public class Book implements Serializable{
 		} else if (!authors.equals(other.authors)) {
 			return false;
 		}
-		if (idBook != other.idBook) {
+		if (isbnBook != other.isbnBook) {
 			return false;
 		}
 		if (title == null) {
@@ -165,14 +170,24 @@ public class Book implements Serializable{
 	}
 
 
-	public long getIdBook() {
-		return idBook;
+	public long getIsbnBook() {
+		return isbnBook;
 	}
 
 
-	public void setIdBook(long idBook) {
-		this.idBook = idBook;
+	public void setIsbnBook(long isbnBook) {
+		this.isbnBook = isbnBook;
 	}
+
+
+//	public long getIdBook() {
+//		return idBook;
+//	}
+//
+//
+//	public void setIdBook(long idBook) {
+//		this.idBook = idBook;
+//	}
 
 
 	/*	@Override

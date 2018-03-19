@@ -32,12 +32,20 @@ public class LibraryApplication implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		
 		Author author1= new Author("Markus Garvey","mgarvey@hotmail.com");
-		Book book1= new Book("My Way", java.sql.Date.valueOf("2017-03-01"));
-		book1.setQuantity(new Long(100));
-		author1.getBooks().add(book1);
+		Author author2= new Author ("Hans-Jürgen Massaquoi","hj@gmail.com");
+		Book b1=  new Book(1112223111117L,"My Kindheit in Deutschland", java.sql.Date.valueOf("2009-03-01"));
+		b1.getAuthors().add(author1);
+		b1.getAuthors().add(author2);
+		bookRepository.save(b1);
+		
+		//Book book1= new Book(1112223111132L,"My Way", java.sql.Date.valueOf("2017-03-01"));
+		//book1.setQuantity(new Long(100));
+		//author1.getBooks().add(book1);
 		//java.util.ArrayList<Author> existing=(ArrayList<Author>) authorRepository.findAll();
 		
-		authorRepository.save(author1);
+		//authorRepository.save(author1);
+		
+		
 		
 		
 		
